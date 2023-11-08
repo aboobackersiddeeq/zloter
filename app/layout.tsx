@@ -1,20 +1,20 @@
+ 
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '../styles/globals.css'
-import { Navbar } from '@/components/Navbar'
 import Head from 'next/head'
 
 const inter = Inter({ subsets: ['latin'] })
-
 export const metadata: Metadata = {
   title: 'Zloter',
   description: 'Online publishing platform',
 }
 
 export default function RootLayout({
-  children,
+  children
 }: {
-  children: React.ReactNode
+  children: React.ReactNode,
+  hideNavbar?: boolean
 }) {
   return (
     // <html lang="en">
@@ -35,7 +35,8 @@ export default function RootLayout({
           <meta property="og:image:height" content="630" />
         </Head>
         <header>
-          <Navbar />
+         
+          
         </header>
         {children}
       </body>
