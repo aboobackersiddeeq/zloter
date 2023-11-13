@@ -2,9 +2,15 @@
 import { Avatar, Badge } from "@mui/material";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import { NotificationsOutlined, SearchOutlined } from "@mui/icons-material";
-import { useState } from "react";
+import React, { useState } from "react";
+import Link from "next/link";
+
+import { useSession } from "next-auth/react";
+import BasicList from "./list";
+
 export const Navbar = () => {
   const [userLog, setUserLog] = useState(true);
+  const [open, setOpen] = useState(false);
   return (
     <div className="w-full fixed z-20">
       <div className="flex justify-between p-2 bg-white shadow-sm align-middle z-10  ">
@@ -40,9 +46,10 @@ export const Navbar = () => {
               </Badge>
             </div>
 
-            <div className="pr-4 py-0.5 ">
+            <div className="pr-4 py-0.5" onClick={() => {setOpen(true)}}>
               <Avatar alt="Remy Sharp" src=" " sx={{ width: 30, height: 30 }} />
             </div>
+            {open && <BasicList/>}
           </div>
         ) : (
           <>
@@ -50,8 +57,6 @@ export const Navbar = () => {
             <button>Get started</button>
           </>
         )}
-
-        {/*  */}
       </div>
     </div>
   );

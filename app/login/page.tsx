@@ -1,4 +1,17 @@
+"use client"
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+import { useEffect } from "react";
+
 const Login = () => {
+  const { data: session } = useSession();
+  const auth =  session;
+
+  useEffect(() => {
+    if (!auth) {
+      return redirect("/");
+    }
+  }, []);
   return (
     <div className="max-w-full ">
       <div className="  flex  justify-center items-center min-h-screen pt-3  ">

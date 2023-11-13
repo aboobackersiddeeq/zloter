@@ -1,14 +1,13 @@
-  
+
 import NextAuth from "next-auth";
 
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import TwitterProvider from "next-auth/providers/twitter";
-import AppleProvider from "next-auth/providers/apple";
-import EmailProvider from "next-auth/providers/email";
+// import EmailProvider from "next-auth/providers/email";
 
-import User from "../../../../models/user";
-import { connectToDB } from "../../../../utils/database";
+import User from "@/models/User";
+import { connectToDB } from "@/utils/Database";
 declare module "next-auth" {
 
   interface Session {
@@ -28,21 +27,18 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
     GithubProvider({
-        clientId: process.env.GITHUB_ID as string,
-        clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
-      }),
+      clientId: process.env.GITHUB_ID as string,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+    }),
     TwitterProvider({
-        clientId: process.env.TWITTER_ID as string,
-        clientSecret: process.env.TWITTER_CLIENT_SECRET as string,
-      }),
-    AppleProvider({
-        clientId: process.env.APPLE_ID as string,
-        clientSecret: process.env.APPLE_CLIENT_SECRET as string,
-      }),
-    EmailProvider({
-        server: process.env.EMAIL_SERVER,
-        from: process.env.EMAIL_FROM,
-      }),
+      clientId: process.env.TWITTER_ID as string,
+      clientSecret: process.env.TWITTER_CLIENT_SECRET as string,
+    }),
+
+    // EmailProvider({
+    //     server: process.env.EMAIL_SERVER,
+    //     from: process.env.EMAIL_FROM,
+    //   }),
   ],
   callbacks: {
     async session({ session }: any) {
@@ -69,6 +65,7 @@ const handler = NextAuth({
         }
         return true;
       } catch (error) {
+        console.log(error, 'error form provider')
         return false;
       }
     },

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 let isConnected = false; // track the connection
 const connectOptions = {
-    dbName: 'share_prompt',
+    dbName: 'zloter',
     useNewUrlParser: true,
     useUnifiedTopology: true,
 };
