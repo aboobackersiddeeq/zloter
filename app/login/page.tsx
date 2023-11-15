@@ -1,17 +1,17 @@
-"use client"
-import { useSession } from "next-auth/react";
+"use client";
+import { signIn, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useEffect } from "react";
 
 const Login = () => {
   const { data: session } = useSession();
-  const auth =  session;
-
+  const auth = session;
+  const providers = ["google", "github", "twitter"];
   useEffect(() => {
-    if (!auth) {
+    if (auth?.user) {
       return redirect("/");
     }
-  }, []);
+  }, [session]);
   return (
     <div className="max-w-full ">
       <div className="  flex  justify-center items-center min-h-screen pt-3  ">
@@ -22,27 +22,21 @@ const Login = () => {
           <h1 className=" text-center text-2xl font-light py-4  ">
             Welcome Back
           </h1>
-          <div className="space-y-3 pt-8  ">
-            <div className="p-3 flex border rounded-xl ">
-              <img src="/assets/icons/google.svg" alt="" />
-              <span className=" w-full flex justify-center">
-                Continue with Google
-              </span>
-            </div>
-
-            <div className="flex p-3 border  rounded-xl ">
-              <img src="/assets/icons/github.svg" alt="" />
-              <span className="w-full flex justify-center">
-                Continue with GitHub
-              </span>
-            </div>
-            <div className="flex p-3 border rounded-xl">
-              <img src="/assets/icons/twitter.svg" alt="" />
-              <p className="w-full flex justify-center">
-                {" "}
-                Continue with Twitter
-              </p>
-            </div>
+          <div className="space-y-3 pt-8">
+            {providers.map((value, i) => {
+              return (
+                <div
+                  key={value}
+                  onClick={() => signIn(value)}
+                  className="p-3 flex border rounded-xl  cursor-pointer"
+                >
+                  <img src={`/assets/icons/${value}.svg`} alt="" />
+                  <span className="flex justify-center w-full ">
+                    Sign in with {value[0].toUpperCase() + value.slice(1)}
+                  </span>
+                </div>
+              );
+            })}
           </div>
           <div className="relative  py-4 mt-4">
             <hr />

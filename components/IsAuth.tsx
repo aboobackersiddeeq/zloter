@@ -1,6 +1,6 @@
 // isAuth.tsx
 "use client";
-import { isAuthenticated } from "@/utils/Auth";
+ 
 import { useEffect } from "react";
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";

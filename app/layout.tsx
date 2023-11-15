@@ -2,7 +2,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '../styles/globals.css'
-import Head from 'next/head'
+// import Head from 'next/head'
 import Provider from '@/components/Provider'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -28,7 +28,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Provider>
 
-        <Head>
+        {/* <Head>
           <title>Zloter</title>
           <meta name="description" content="Online publishing platform" />
           <meta property="og:title" content="Zloter" />
@@ -36,7 +36,7 @@ export default function RootLayout({
           <meta property="og:image" content="/path/to/your/header-image.jpg" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
-        </Head>
+        </Head> */}
         <header>
          
           

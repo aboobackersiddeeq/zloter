@@ -10,7 +10,7 @@ const Login = () => {
   const auth =  session;
 
   useEffect(() => {
-    if (!auth) {
+    if (auth?.user) {
       return redirect("/");
     }
   }, []);
@@ -53,35 +53,7 @@ const Login = () => {
               </div>
             );
           })}
-          {/* <div
-            onClick={() => provider && signIn("google")}
-            className="p-3 flex border rounded-xl  cursor-pointer"
-          >
-            <img src="/assets/icons/google.svg" alt="" />
-            <span className="flex justify-center w-full ">
-              Sign up with Google
-            </span>
-          </div>
-          <div
-            onClick={() => provider && signIn("github")}
-            className="flex p-3 border  rounded-xl cursor-pointer "
-          >
-            <img src="/assets/icons/github.svg" alt="" />
-            <span className="w-full flex justify-center">
-              Sign up with GitHub
-            </span>
-          </div>
-          <div
-            onClick={() => provider && signIn("twitter")}
-            className="flex p-3 border rounded-xl cursor-pointer"
-          >
-            <img src="/assets/icons/twitter.svg" alt="" />
-            <p className="w-full flex justify-center"> Sign up with Twitter</p>
-          </div>
-          <div className="flex p-3 border rounded-xl cursor-pointer">
-            <img src="/assets/icons/email.svg" alt="" />
-            <p className="w-full flex justify-center"> Sign up with Email</p>
-          </div> */}
+          
         </div>
 
         <p className="italic text-xs py-3">

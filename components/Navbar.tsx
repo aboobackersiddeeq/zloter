@@ -2,17 +2,25 @@
 import { Avatar, Badge } from "@mui/material";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import { NotificationsOutlined, SearchOutlined } from "@mui/icons-material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { useSession } from "next-auth/react";
-import BasicList from "./list";
+import BasicList from "./List";
 
 export const Navbar = () => {
-  const [userLog, setUserLog] = useState(true);
+  const { data: session } = useSession();
+  const [userLog, setUserLog] = useState(false);
+  useEffect(() => {
+    if (session) {
+      setUserLog(true);
+    } else {
+      setUserLog(false);
+    }
+  },[session]);
   const [open, setOpen] = useState(false);
   return (
-    <div className="w-full fixed z-20">
+    <div className="w-full   z-20">
       <div className="flex justify-between p-2 bg-white shadow-sm align-middle z-10  ">
         <div className="flex space-x-6">
           <h1 className=" py-1.5 pl-3  text-xl font-extrabold">
@@ -46,15 +54,40 @@ export const Navbar = () => {
               </Badge>
             </div>
 
-            <div className="pr-4 py-0.5" onClick={() => {setOpen(true)}}>
-              <Avatar alt="Remy Sharp" src=" " sx={{ width: 30, height: 30 }} />
+            <div
+              className="pr-4 py-0.5 relative"
+              onClick={() => {
+                !open ? setOpen(true) : setOpen(false);
+              }}
+            >
+              <Avatar alt={ session?.user.name || 'A'} src={session?.user.image|| ''}  sx={{ width: 30, height: 30 }} />
+              {open && (
+                <div className="absolute mt-2 right-2 z-50 shadow-2xl bg-white border- border ">
+                  <BasicList />
+                </div>
+              )}
             </div>
-            {open && <BasicList/>}
           </div>
         ) : (
           <>
-            <h6>Sign In</h6>
-            <button>Get started</button>
+            <div className="flex sm:space-x-8 space-x-4">
+              <div className="flex py-1.5 space-x-1 sm:hidden ">
+                <SearchOutlined />
+              </div>
+              <div className=" ">
+                <Link href={"/login "}>
+                  <div className="flex py-2 space-x-1">
+                    <button className="text-sm">Sign In</button>
+                  </div>
+                </Link>
+              </div>
+
+              <div className="">
+                <button className="bg-black text-white text-sm rounded-3xl p-2 px-3">
+                  Get started
+                </button>
+              </div>
+            </div>
           </>
         )}
       </div>
