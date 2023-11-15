@@ -1,13 +1,13 @@
 "use client";
 import { Close, Menu, SearchOutlined } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 
 // interface NavbarProps {
 //   sendData: (data: boolean) => void;
 // }
-const Navbar  = ( ) => {
+const Navbar = () => {
   // inner width
   const [screenWidth, setScreenWidth] = useState(0);
 
@@ -34,15 +34,14 @@ const Navbar  = ( ) => {
     }
   }, [screenWidth]);
   return (
-    <div className=" flex-row h-16 w-full border  relative">
+    <div className=" flex-row h-16 overflow-hidden border  relative">
       {open && (
         <div className="absolute flex    z-50 shadow-2xl bg-white border- border md:hidden ">
           <Sidebar />
           <div
-            className="relative"
+            className="relative cursor-pointer"
             onClick={() => {
               setOpen(false);
-         
             }}
           >
             <Close className="  absolute  shadow-2xl top-1" />
@@ -64,10 +63,10 @@ const Navbar  = ( ) => {
             type="text"
             name="search"
             placeholder="Search..."
-            className=" pl-12 px-4  rounded-3xl py-2.5  focus:outline-none placeholder:text-gray-400 text-sm "
+            className=" pl-12 px-4 w-auto rounded-3xl py-2.5  focus:outline-none placeholder:text-gray-400 text-sm "
           />
         </div>
-        <div className="p-3">
+        <div className="p-3 hidden sm:block">
           <Avatar alt="Admin" src="" />
         </div>
       </div>

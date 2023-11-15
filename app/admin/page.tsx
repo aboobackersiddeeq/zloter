@@ -1,16 +1,15 @@
 // Import necessary dependencies and components
 
+import AdminNav from "@/components/adiminComponetns/Main";
 import Navbar from "@/components/adiminComponetns/Navbar";
 import Sidebar from "@/components/adiminComponetns/Sidebar";
 import React, { useState } from "react";
 
 const Admin: React.FC = () => {
   return (
-    <div className="flex">
-      <div className="hidden md:block">
-        <Sidebar />
-      </div>
-      <Navbar />
+    <div>
+        <AdminNav/>
+        
     </div>
   );
 };

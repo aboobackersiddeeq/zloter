@@ -1,4 +1,5 @@
 import { HomeOutlined, PeopleAltOutlined } from "@mui/icons-material";
+import Link from "next/link";
 
 const Sidebar = () => {
   return (
@@ -7,14 +8,18 @@ const Sidebar = () => {
         <span className="bg-red-600 text-white p-0.5 ">ZLO</span>TER
       </h1>
       <ul className="cursor-pointer space-y-1">
+        <Link href='/admin'>
         <li className="p-3 hover:bg-slate-50 flex space-x-3">
           <HomeOutlined  />
           <h1>Dashboard</ h1>
         </li>
+        </Link>
+        <Link href="/admin/user" >
         <li className="p-3 hover:bg-slate-50 flex space-x-3">
           <PeopleAltOutlined />
-          <h1>Dashboard</ h1>
+          <h1>People</ h1>
         </li>
+        </Link>
         
       </ul>
     </div>
